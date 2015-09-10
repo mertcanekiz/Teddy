@@ -23,7 +23,7 @@ void Renderer::render()
 	{
 		sprite->getTransform().setRotation(SDL_GetTicks() / 10.0f);
 		sprite->getShader()->bind();
-		sprite->getShader()->setUniform("modelview_matrix", sprite->getTransform().getTransformationMatrix());
+		//sprite->getShader()->setUniform("modelview_matrix", sprite->getTransform().getTransformationMatrix());
 		sprite->getShader()->setUniform("mvp_matrix", projection_matrix * sprite->getTransform().getTransformationMatrix());
 		sprite->getTexture()->bind();
 

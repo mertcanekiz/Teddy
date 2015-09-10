@@ -9,8 +9,7 @@ out DATA
 } vs_out;
 
 uniform mat4 modelview_matrix;
-uniform mat4 mvp_matrix = mat4(1.0);
-uniform mat4 projection_matrix = mat4(1.0);
+uniform mat4 mvp_matrix;
 
 void main()
 {
