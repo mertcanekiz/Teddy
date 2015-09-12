@@ -6,7 +6,7 @@
 Texture::Texture(const char* filename)
 	: filename(filename)
 {
-
+	textureID = 0;
 }
 
 Texture::~Texture()
@@ -32,10 +32,7 @@ void Texture::load()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	if(comp == 3)
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	else if(comp == 4)
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -51,3 +48,4 @@ void Texture::unbind()
 {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
+

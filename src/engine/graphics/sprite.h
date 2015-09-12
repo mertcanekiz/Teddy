@@ -1,6 +1,7 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef ENGINE_GRAPHICS_SPRITE_H_
+#define ENGINE_GRAPHICS_SPRITE_H_
 
+#include "opengl.h"
 #include "texture.h"
 #include "shader.h"
 #include "../util/transform.h"
@@ -8,14 +9,14 @@
 class Sprite
 {
 public:
-	Sprite(glm::vec2 size = glm::vec2(2.0f), Texture* texture = NULL, Shader* shader = NULL);
+	Sprite(glm::vec2 size, Texture* texture, Shader* shader);
 	~Sprite();
 
 	void init();
 
 	inline Texture* getTexture() { return texture; }
 	inline Shader* getShader() { return shader; }
-	inline Transform& getTransform() { return transform; }
+	inline Transform* getTransform() { return transform; }
 	inline GLuint getVAOID() const { return vao; }
 
 private:
@@ -28,9 +29,7 @@ private:
 	glm::vec2 size;
 	Texture* texture;
 	Shader* shader;
-
-	Transform transform;
-
+	Transform* transform;
 };
 
-#endif
+#endif /* ENGINE_GRAPHICS_SPRITE_H_ */

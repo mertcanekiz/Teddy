@@ -1,16 +1,15 @@
-#ifndef OPENGL_H
-#define OPENGL_H
+#ifndef ENGINE_GRAPHICS_OPENGL_H_
+#define ENGINE_GRAPHICS_OPENGL_H_
 
-#if defined __APPLE__
-#include <OpenGL/gl3.h>
-#define NOGLEW
+#ifdef __APPLE__
+	#include <OpenGL/gl3.h>
+	#define NOGLEW
 #else
-#include <GL/glew.h>
+	#include <GL/glew.h>
 #endif
 
-#define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
-#endif
+#endif /* ENGINE_GRAPHICS_OPENGL_H_ */

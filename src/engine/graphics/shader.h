@@ -1,8 +1,7 @@
-#ifndef SHADER_H
-#define SHADER_H 
+#ifndef ENGINE_GRAPHICS_SHADER_H_
+#define ENGINE_GRAPHICS_SHADER_H_
 
 #include "opengl.h"
-
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -11,7 +10,6 @@
 
 class Shader
 {
-	
 public:
 	Shader(const char* vertexPath, const char* fragmentPath);
 	~Shader();
@@ -31,7 +29,6 @@ private:
 	const char* vertexPath;
 	const char* fragmentPath;
 	std::unordered_map<std::string, GLint> uniforms;
-	
 };
 
-#endif
+#endif /* ENGINE_GRAPHICS_SHADER_H_ */

@@ -3,8 +3,12 @@
 Sprite::Sprite(glm::vec2 size, Texture* texture, Shader* shader)
 	: size(size), texture(texture), shader(shader)
 {
-	float halfWidth = (float) size.x;
-	float halfHeight = (float) size.y;
+	transform = new Transform();
+	vao = vbo = tbo = ibo = 0;
+
+	float halfWidth = (float) size.x / 2.0f;
+	float halfHeight = (float) size.y / 2.0f;
+
 	positions =
 	{
 		-halfWidth, -halfHeight, 0.0f,
@@ -12,8 +16,6 @@ Sprite::Sprite(glm::vec2 size, Texture* texture, Shader* shader)
 		 halfWidth,  halfHeight, 0.0f,
 		-halfWidth,  halfHeight, 0.0f
 	};
-
-	std::cout << halfWidth << std::endl;
 
 	texCoords =
 	{
@@ -35,15 +37,16 @@ Sprite::~Sprite()
 	glDeleteBuffers(1, &vbo);
 	glDeleteBuffers(1, &tbo);
 	glDeleteBuffers(1, &ibo);
-
 	glDeleteVertexArrays(1, &vao);
+	if(shader) delete shader;
+	if(texture) delete texture;
+	delete transform;
 }
 
 void Sprite::init()
 {
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-		std::cout << "bound" << std::endl;
 
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -61,8 +64,8 @@ void Sprite::init()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof indices[0] * indices.size(), &indices[0], GL_STATIC_DRAW);
 
-	shader->load();
-	texture->load();
-	glBindVertexArray(0);
+		shader->load();
+		texture->load();
 
+	glBindVertexArray(0);
 }

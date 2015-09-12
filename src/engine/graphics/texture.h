@@ -1,5 +1,5 @@
-#ifndef TEXTURE_H
-#define TEXTURE_H 
+#ifndef ENGINE_GRAPHICS_TEXTURE_H_
+#define ENGINE_GRAPHICS_TEXTURE_H_
 
 #include "opengl.h"
 #include <iostream>
@@ -9,7 +9,7 @@ class Texture
 public:
 	Texture(const char* filename);
 	~Texture();
-	
+
 	void load();
 	void bind() const;
 	static void unbind();
@@ -19,4 +19,4 @@ private:
 	const char* filename;
 };
 
-#endif
+#endif /* ENGINE_GRAPHICS_TEXTURE_H_ */

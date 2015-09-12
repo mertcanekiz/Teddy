@@ -3,13 +3,14 @@
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
 	: vertexPath(vertexPath), fragmentPath(fragmentPath)
 {
-
+	programID = 0;
 }
 
 Shader::~Shader()
 {
 	glDeleteProgram(programID);
 }
+
 
 void Shader::setUniform(const char* name, float value)
 {
@@ -139,8 +140,8 @@ void Shader::load()
 	glGetProgramInfoLog(programID, infoLogLength, NULL, &validateErrorMessage[0]);
 	if(result == GL_FALSE)
 		std::cerr << "Could not validate shader program: " << &validateErrorMessage[0] << std::endl;
-	std::cout << std::endl;
 
 	glDeleteShader(vertexShaderID);
 	glDeleteShader(fragmentShaderID);
 }
+

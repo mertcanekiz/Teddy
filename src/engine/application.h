@@ -1,15 +1,11 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef ENGINE_APPLICATION_H_
+#define ENGINE_APPLICATION_H_
 
 #include "graphics/opengl.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 
-#include "../game/testgame.h"
-
-class Application
-{
-
+class Application {
 public:
 	Application(int width, int height, const char* title, bool fullscreen);
 	~Application();
@@ -29,13 +25,10 @@ private:
 	const char* title;
 	bool fullscreen;
 
+	bool running;
 	SDL_Window* window;
 	SDL_GLContext glContext;
 	SDL_Event event;
-	bool running;
-
-	TestGame game;
-
 };
 
-#endif
+#endif /* ENGINE_APPLICATION_H_ */

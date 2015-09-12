@@ -6,8 +6,9 @@ Application::Application(int width, int height, const char* title, bool fullscre
 	  title(title),
 	  fullscreen(fullscreen)
 {
-	window = NULL;
 	running = false;
+	window = NULL;
+	glContext = NULL;
 }
 
 Application::~Application()
@@ -21,8 +22,6 @@ int Application::run()
 {
 	if(!init())
 		return -1;
-
-	game.init();
 
 	running = true;
 
@@ -51,7 +50,7 @@ void Application::update()
 void Application::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	game.render();
+
 	SDL_GL_SwapWindow(window);
 }
 
@@ -62,7 +61,7 @@ bool Application::init()
 
 bool Application::initSDL()
 {
-	if(SDL_Init(SDL_INIT_VIDEO) < 0)
+	if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		std::cerr << "Could not initialize SDL: " << SDL_GetError() << std::endl;
 		return false;
@@ -72,12 +71,8 @@ bool Application::initSDL()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-	window = SDL_CreateWindow(title,
-					SDL_WINDOWPOS_CENTERED,
-					SDL_WINDOWPOS_CENTERED,
-					width,
-					height,
-					SDL_WINDOW_OPENGL);
+	window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+							  width, height, SDL_WINDOW_OPENGL | (fullscreen ? SDL_WINDOW_FULLSCREEN : SDL_WINDOW_SHOWN));
 
 	if(window == NULL)
 	{
@@ -87,7 +82,7 @@ bool Application::initSDL()
 
 	glContext = SDL_GL_CreateContext(window);
 
-	if(window == NULL)
+	if(glContext == NULL)
 	{
 		std::cerr << "Could not create OpenGL context: " << SDL_GetError() << std::endl;
 		return false;
@@ -99,22 +94,23 @@ bool Application::initSDL()
 bool Application::initOpenGL()
 {
 	#ifndef NOGLEW
-	glewExperimental = true;
-	GLenum glewResult = glewInit();
-	if(glewResult != GLEW_OK)
-	{
-		std::cerr << "Could not initialize GLEW: " << glewGetErrorString(glewResult) << std::endl;
-		return false;
-	}
+
+		glewExperimental = true;
+		GLenum glewResult = glewInit();
+		if(glewResult != GLEW_OK)
+		{
+			std::cerr << "Could not initialize GLEW: " << glewGetErrorString(glewResult) << std::endl;
+			return false;
+		}
+
 	#endif
 
-	std::cout << glGetString(GL_VERSION) << std::endl;
+	std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
 
-	glClearColor(0, 0.5, 0.5, 1);
+	glClearColor(0.0f, 0.5f, 0.5f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//glFrontFace(GL_CW);
 
 	return true;
 }
