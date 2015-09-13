@@ -16,6 +16,9 @@ public:
 	void add(Sprite* sprite);
 	void render();
 	
+private:
+	std::vector<Sprite*> sprites;
+	glm::mat4 projectionMatrix;
 };
 
 #endif /* ENGINE_GRAPHICS_RENDERER_H_ */
