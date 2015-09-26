@@ -26,12 +26,13 @@ public:
 	void setVelocity(const glm::vec2& velocity) { this->velocity = velocity; }
 	void setAcceleration(const glm::vec2& acceleration) { this->acceleration = acceleration; }
 
-protected:
-	void init() = 0;
-	void input(const SDL_Event& event) = 0;
-	void update() = 0;
-	void render() = 0;
+	virtual void init() = 0;
+	virtual void input(const SDL_Event& event) = 0;
+	virtual void update() = 0;
+	virtual void render() = 0;
 
+protected:
+	
 	glm::vec2 position;
 	glm::vec2 size;
 	glm::vec2 velocity;
