@@ -18,8 +18,8 @@ public:
 	const glm::vec2& getVelocity() const { return velocity; }
 	const glm::vec2& getAcceleration() const { return acceleration; }
 
-	Sprite* getSprite() const { return sprite; }
-	Transform* getTransform() const { return transform; }
+	Sprite getSprite() const { return sprite; }
+	Transform getTransform() const { return transform; }
 
 	void setPosition(const glm::vec2& position) { this->position = position; }
 	void setSize(const glm::vec2& size) { this->size = size; }
@@ -38,8 +38,8 @@ protected:
 	glm::vec2 velocity;
 	glm::vec2 acceleration;
 
-	Sprite* sprite;
-	Transform* transform;
+	Sprite sprite;
+	Transform transform;
 };
 
 #endif
