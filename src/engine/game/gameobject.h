@@ -10,7 +10,7 @@
 class GameObject
 {
 public:
-	GameObject(const glm::vec2& position, const glm::vec2& size);
+	GameObject(const glm::vec2& position, const glm::vec2& size, const Sprite& sprite, const Transform& transform);
 	virtual ~GameObject();
 
 	const glm::vec2& getPosition() const { return position; }
@@ -18,8 +18,8 @@ public:
 	const glm::vec2& getVelocity() const { return velocity; }
 	const glm::vec2& getAcceleration() const { return acceleration; }
 
-	Sprite getSprite() const { return sprite; }
-	Transform getTransform() const { return transform; }
+	Sprite& getSprite() { return sprite; }
+	Transform& getTransform() { return transform; }
 
 	void setPosition(const glm::vec2& position) { this->position = position; }
 	void setSize(const glm::vec2& size) { this->size = size; }
