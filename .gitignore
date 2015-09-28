@@ -13,3 +13,4 @@ teddy.exe
 *.un~
 Session.vim
 .netrwhist
+build/
