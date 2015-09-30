@@ -1,5 +1,5 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef ENTITY_H
+#define ENTITY_H
 
 #include "../graphics/opengl.h"
 #include <SDL2/SDL.h>
@@ -7,11 +7,11 @@
 #include "../graphics/sprite.h"
 #include "../util/transform.h"
 
-class GameObject
+class Entity
 {
 public:
-	GameObject(const glm::vec2& position, const glm::vec2& size, const Sprite& sprite, const Transform& transform);
-	virtual ~GameObject();
+	Entity(const glm::vec2& position, const glm::vec2& size, const Sprite& sprite, const Transform& transform);
+	virtual ~Entity();
 
 	const glm::vec2& getPosition() const { return position; }
 	const glm::vec2& getSize() const { return size; }
